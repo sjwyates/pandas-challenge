@@ -1,0 +1,340 @@
+let text = `<div id="players" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Number of Players</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>576</td>
+    </tr>
+  </tbody>
+</table></div><div id="purchasing" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Number of Unique Items</th>
+      <th>Average Price</th>
+      <th>Number of Purchases</th>
+      <th>Total Revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>179</td>
+      <td>$3.05</td>
+      <td>780</td>
+      <td>$2,379.77</td>
+    </tr>
+  </tbody>
+</table></div><div id="genderDemos" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Gender</th>
+      <th>Total Count</th>
+      <th>Percentage of Players</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Female</td>
+      <td>81</td>
+      <td>14.06%</td>
+    </tr>
+    <tr>
+      <td>Male</td>
+      <td>484</td>
+      <td>84.03%</td>
+    </tr>
+    <tr>
+      <td>Other / Non-Disclosed</td>
+      <td>11</td>
+      <td>1.91%</td>
+    </tr>
+  </tbody>
+</table></div><div id="genderAnalysis" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Gender</th>
+      <th>Purchase Count</th>
+      <th>Average Purchase Price</th>
+      <th>Total Purchase Value</th>
+      <th>Avg Total Purchase per Person</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Female</td>
+      <td>113</td>
+      <td>$3.20</td>
+      <td>$361.94</td>
+      <td>$4.47</td>
+    </tr>
+    <tr>
+      <td>Male</td>
+      <td>652</td>
+      <td>$3.02</td>
+      <td>$1,967.64</td>
+      <td>$4.07</td>
+    </tr>
+    <tr>
+      <td>Other / Non-Disclosed</td>
+      <td>15</td>
+      <td>$3.35</td>
+      <td>$50.19</td>
+      <td>$4.56</td>
+    </tr>
+  </tbody>
+</table></div><div id="ageDemos" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Age Range</th>
+      <th>Total Count</th>
+      <th>Percentage of Players</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt; 10</td>
+      <td>17</td>
+      <td>2.95%</td>
+    </tr>
+    <tr>
+      <td>10 - 14</td>
+      <td>22</td>
+      <td>3.82%</td>
+    </tr>
+    <tr>
+      <td>15 - 19</td>
+      <td>107</td>
+      <td>18.58%</td>
+    </tr>
+    <tr>
+      <td>20 - 24</td>
+      <td>258</td>
+      <td>44.79%</td>
+    </tr>
+    <tr>
+      <td>25 - 29</td>
+      <td>77</td>
+      <td>13.37%</td>
+    </tr>
+    <tr>
+      <td>30 - 34</td>
+      <td>52</td>
+      <td>9.03%</td>
+    </tr>
+    <tr>
+      <td>35 - 39</td>
+      <td>31</td>
+      <td>5.38%</td>
+    </tr>
+    <tr>
+      <td>&gt; 40</td>
+      <td>12</td>
+      <td>2.08%</td>
+    </tr>
+  </tbody>
+</table></div><div id="ageAnalysis" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Age Range</th>
+      <th>Purchase Count</th>
+      <th>Average Purchase Price</th>
+      <th>Total Purchase Value</th>
+      <th>Avg Total Purchase per Person</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt; 10</td>
+      <td>23</td>
+      <td>$3.35</td>
+      <td>$77.13</td>
+      <td>$4.54</td>
+    </tr>
+    <tr>
+      <td>10 - 14</td>
+      <td>28</td>
+      <td>$2.96</td>
+      <td>$82.78</td>
+      <td>$3.76</td>
+    </tr>
+    <tr>
+      <td>15 - 19</td>
+      <td>136</td>
+      <td>$3.04</td>
+      <td>$412.89</td>
+      <td>$3.86</td>
+    </tr>
+    <tr>
+      <td>20 - 24</td>
+      <td>365</td>
+      <td>$3.05</td>
+      <td>$1,114.06</td>
+      <td>$4.32</td>
+    </tr>
+    <tr>
+      <td>25 - 29</td>
+      <td>101</td>
+      <td>$2.90</td>
+      <td>$293.00</td>
+      <td>$3.81</td>
+    </tr>
+    <tr>
+      <td>30 - 34</td>
+      <td>73</td>
+      <td>$2.93</td>
+      <td>$214.00</td>
+      <td>$4.12</td>
+    </tr>
+    <tr>
+      <td>35 - 39</td>
+      <td>41</td>
+      <td>$3.60</td>
+      <td>$147.67</td>
+      <td>$4.76</td>
+    </tr>
+    <tr>
+      <td>&gt; 40</td>
+      <td>13</td>
+      <td>$2.94</td>
+      <td>$38.24</td>
+      <td>$3.19</td>
+    </tr>
+  </tbody>
+</table></div><div id="topSpenders" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>SN</th>
+      <th>Purchase Count</th>
+      <th>Average Purchase Price</th>
+      <th>Total Purchase Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lisosia93</td>
+      <td>5</td>
+      <td>$3.79</td>
+      <td>$18.96</td>
+    </tr>
+    <tr>
+      <td>Idastidru52</td>
+      <td>4</td>
+      <td>$3.86</td>
+      <td>$15.45</td>
+    </tr>
+    <tr>
+      <td>Chamjask73</td>
+      <td>3</td>
+      <td>$4.61</td>
+      <td>$13.83</td>
+    </tr>
+    <tr>
+      <td>Iral74</td>
+      <td>4</td>
+      <td>$3.40</td>
+      <td>$13.62</td>
+    </tr>
+    <tr>
+      <td>Iskadarya95</td>
+      <td>3</td>
+      <td>$4.37</td>
+      <td>$13.10</td>
+    </tr>
+  </tbody>
+</table></div><div id="popularItems" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Item ID</th>
+      <th>Item Name</th>
+      <th>Purchase Count</th>
+      <th>Item Price</th>
+      <th>Total Purchase Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>92</td>
+      <td>Final Critic</td>
+      <td>13</td>
+      <td>$4.61</td>
+      <td>$59.99</td>
+    </tr>
+    <tr>
+      <td>178</td>
+      <td>Oathbreaker, Last Hope of the Breaking Storm</td>
+      <td>12</td>
+      <td>$4.23</td>
+      <td>$50.76</td>
+    </tr>
+    <tr>
+      <td>145</td>
+      <td>Fiery Glass Crusader</td>
+      <td>9</td>
+      <td>$4.58</td>
+      <td>$41.22</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>Persuasion</td>
+      <td>9</td>
+      <td>$3.22</td>
+      <td>$28.99</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>Extraction, Quickblade Of Trembling Hands</td>
+      <td>9</td>
+      <td>$3.53</td>
+      <td>$31.77</td>
+    </tr>
+  </tbody>
+</table></div><div id="profitableItems" class="container table-container"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Item ID</th>
+      <th>Item Name</th>
+      <th>Purchase Count</th>
+      <th>Item Price</th>
+      <th>Total Purchase Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>92</td>
+      <td>Final Critic</td>
+      <td>13</td>
+      <td>$4.61</td>
+      <td>$59.99</td>
+    </tr>
+    <tr>
+      <td>178</td>
+      <td>Oathbreaker, Last Hope of the Breaking Storm</td>
+      <td>12</td>
+      <td>$4.23</td>
+      <td>$50.76</td>
+    </tr>
+    <tr>
+      <td>82</td>
+      <td>Nirvana</td>
+      <td>9</td>
+      <td>$4.90</td>
+      <td>$44.10</td>
+    </tr>
+    <tr>
+      <td>145</td>
+      <td>Fiery Glass Crusader</td>
+      <td>9</td>
+      <td>$4.58</td>
+      <td>$41.22</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>Singed Scalpel</td>
+      <td>8</td>
+      <td>$4.35</td>
+      <td>$34.80</td>
+    </tr>
+  </tbody>
+</table></div>`

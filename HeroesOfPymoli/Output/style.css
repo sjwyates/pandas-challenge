@@ -1,0 +1,24 @@
+* {
+    background-color: #eeeeee;
+  margin: 0rem;
+  padding: 0rem;
+  text-align: center;
+}
+
+table, thead, th, tr, td {
+    border: 1px solid black;
+    margin: 0.2rem auto;
+    text-align: center;
+}
+
+.tables,
+.pymoli-jumbo {
+  margin: 2rem auto;
+  width: 90%;
+}
+
+.pymoli-jumbo {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('Fantasy.png');
+    background-position: center;
+}
