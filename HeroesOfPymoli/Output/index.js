@@ -24,9 +24,9 @@ tables.forEach(table => {
 let tableContainers = content.querySelectorAll('.table-container')
 tableContainers.forEach(tableContainer => {
     let id = tableContainer.id
-    let caption = document.createElement('p')
+    let caption = document.createElement('h4')
     caption.innerHTML = captions[id]
-    caption.classList.add('lead-4')
+    caption.classList.add('h4')
     let table = tableContainer.firstChild
     tableContainer.insertBefore(caption, table)
 })
