@@ -1,5 +1,7 @@
 # Heroes of Pymoli
 
+![Pymoli](./HeroesOfPymoli/images/Fantasy.png)
+
 ### Overview
 
 The goal of this assignment was to apply the capabilities of Pandas to simplify the task of breaking down and analyzing a dataset. This particular dataset contains 780 rows, each representing an in-game purchase made by a player of **Heroes of Pymoli**, an otherwise free-to-play online game. The 7 columns include the details about the item purchased, as well as the user who purchased it:
@@ -40,17 +42,17 @@ Thankfully, with Pandas you can do this with very few lines of code using *Serie
 
 ## The Jupyter Notebook UI
 
-I mainly worked in the Jupyter Notebook browser UI, which lets you write and execute discrete segments of code and see the output in real time in the window. This includes displaying DataFrames as tables, with a fair amount of formatting:
+I mainly worked in the Jupyter Notebook browser UI, which lets you write and execute discrete segments of code and see the output in real time in the window. This includes displaying DataFrames as HTML tables:
 
 ![Pandas dataframe](./HeroesOfPymoli/images/pandas-df.png)
 
-Yes, this means Pandas is outputting HTML/CSS. (You can't see the cursor in that picture, but that row is blue because there's a *:hover* effect.) It's a standard HTML table, with a single class called *dataframe*:
+And there's obviously some CSS going on as well. (You can't see the cursor in that picture, but that row is blue because there's a *:hover* effect.) All the styling comes from a single class called *dataframe*:
 
 ![Pandas HTML output](./HeroesOfPymoli/images/pandas-html.png)
 
-This appears to be the work of the *DataFrame.to_html()* function, which outputs the exact same HTML used to render the table in the browser as a string. So I told Pandas to output the HTML for every table and concatenated them as a string, then wrapped that in `` and prepended *"let = content "*. You may recognize this as a variable declaration and assignment to a template literal in JavaScript.
+I assumed some Jupyter widget was compiling the HTML, but turns out it's actually the *to_html()* function on the DataFrame itself, which outputs an HTML string that Jupyter injects into the DOM as-is. So for fun, I decided to create a web page and do exactly the same thing. First thing I did was concatenate all the output of *to_html()* for every table. Then, to trick Python into writing JavaScript, I wrapped that in backticks and prepended *"let = content "*. Now we have a ready-to-inject JavaScript template literal.
 
-As far as I can tell, Python won't write to a JS file, but the HTML `<script>` tag isn't picky - it's perfectly happy to run JavaScript code from a TXT file. I added a `<script>` tag that pulls in *output.txt* as the second-to-last element in the body of an HTML document. After loading the page, it runs that script, which makes that *content* available for the last element: another `<script>` tag that references *index.js*. That script grabs a `<div>`, sets its *innerHTML* to *content*, then does some more vanilla JS DOM manipulation to add and remove some classes and insert a few child elements. Throw in Bootstrap and *style.css*, spin up LiveServer, and you get this:
+But as far as I can tell, Python won't write to a JS file, but the `<script>` tag isn't picky, it's perfectly happy to run JavaScript code from a TXT file. I created the *index.html* file, added some boilerplate, a jumbotron, and a target `<div>`, then 2 script tags: the first to run *output.txt*, and another to run *index.js*, which injects that *content* variable into the target `<div>` and gives it a haircut. Throw in Bootstrap and a *style.css*, spin up LiveServer, and you get this:
 
 ![Webpage demo](./HeroesOfPymoli/images/pymoli-demo.gif)
 
@@ -64,8 +66,8 @@ Back to the data analysis...
 
 Getting the headline numbers was mostly a matter of grabbing data using a few Pandas functions:
 
-- *nunique()* for player and item counts, because repeats count
-- *count()* for total number of purchases, becasue repeats don't matter
+- *nunique()* for player and item counts
+- *count()* for total number of purchases
 - *mean()* for average price
 - *sum()* for total revenue 
 
@@ -73,13 +75,13 @@ I stored those expressions in a dictionary, then passed that to the *pandas.Data
 
 ### Groupby
 
-The rest of the analysis relies heavily on the *DataFrame.groupby()* method, which takes in one of the column names and groups all the rows by unique values in that column. It's a complex data structure, and most of the struggles I had with this assignment were wrapping my head around what a *groupby* object actually is. One reason is that unlike *Series* and *DataFrame*, Jupyter Notebook doesn't attempt to give you any sort of graphical representation.
+The rest of the analysis relies heavily on the *DataFrame.groupby()* method, which takes in one of the column names and groups all the rows by unique values in that column. It's a complex data structure, and most of the struggles I had with this assignment were wrapping my head around what a *groupby* object actually is. One reason is that unlike *Series* and *DataFrame*, Pandas doesn't attempt to give you any sort of graphical representation, it just spits out the object reference.
 
-I'll admit I still don't quite know how it works under the hood. It's a bit like a Rubik's cube, in that you don't need to be able to be totally fluent in the nature of its 4-dimensional chess, you just need to figure out the basic tricks for manipulating it. It took hours and hours of playing around (and reading StackOverflow), but at some point it clicked and I was able to refactor some pretty procedural Python into fairly complex and elegant Pandas.
+I'll admit I still don't quite know how it works under the hood. It's a bit like a Rubik's cube, in that you don't need to be totally fluent in the nature of its 3-dimensional chess, you just need to figure out the basic tricks for manipulating it. It took hours and hours of playing around (and reading StackOverflow), but at some point it clicked and I was able to refactor some pretty procedural Python into fairly complex and elegant Pandas.
 
 ### Binning
 
-One trick Pandas gives you is *binning*, which lets you cut your dataset based on numerical criteria. Normally you need at least 2 lines of code for each condition - ie, an *if*/*elif*/*else* statement and a code block - but with Pandas, you can just call the *cut()* method on a column and pass it a list of numerical range criteria, plus a list of labels for each slice, then save that as a new column in the DataFrame. This allowed me to demarcate every row into 8 age range bins with 3 lines of code, which would otherwise take upwards of 20.
+One trick Pandas gives you is *binning*, which lets you classify your dataset based on numerical criteria. Normally you need at least 2 lines of code for each condition - ie, an *if*/*elif*/*else* statement and a code block - but with Pandas, you can just call the *cut()* method on a column and pass it a list of numerical range criteria, plus a list of labels for each slice, then save that as a new column in the DataFrame. This allowed me to demarcate every row into 8 age range bins with 3 lines of code, which would otherwise take upwards of 20.
 
 ### Map and format
 
@@ -87,11 +89,11 @@ One of the keys to making data human-readable is making sure it's in the correct
 
 `generic_df["Some Column"] = generic_df["Some Column"].map("${:.2f}".format`
 
-I got tired of doing that over and over, so I told Pandas to format every float as currency with 2 decimal points at the top:
+I got tired of doing that over and over, so I told Pandas to format every float as currency with 2 decimal points near the beginning:
 
 `pd.options.display.float_format = '${:,.2f}'.format`
 
-Now I only had to call *map()* twice to override that formatting for the percents in the gender and age demographics tables.
+Now I only had to call *map()* twice to override that formatting for the percents in the gender and age demographics tables, and all the other floats became currency by default.
 
 ## Summary
 
