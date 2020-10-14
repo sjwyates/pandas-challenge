@@ -46,13 +46,30 @@ I mainly worked in the Jupyter Notebook browser UI, which lets you write and exe
 
 ![Pandas dataframe](./HeroesOfPymoli/images/pandas-df.png)
 
-And there's obviously some CSS going on as well. (You can't see the cursor in that picture, but that row is blue because there's a *:hover* effect.) All the styling comes from a single class called *dataframe*:
+There's also quite a bit of CSS happening. (You can't see the cursor in the screenshot, but that row is blue because there's a *:hover* effect.) All the styling comes from a single class called *dataframe*:
 
 ![Pandas HTML output](./HeroesOfPymoli/images/pandas-html.png)
 
-I assumed some Jupyter widget was compiling the HTML, but turns out it's actually the *to_html()* function on the DataFrame itself, which outputs an HTML string that Jupyter injects into the DOM as-is. So for fun, I decided to create a web page and do exactly the same thing. First thing I did was concatenate all the output of *to_html()* for every table. Then, to trick Python into writing JavaScript, I wrapped that in backticks and prepended *"let = content "*. Now we have a ready-to-inject JavaScript template literal.
+I assumed some Jupyter widget was compiling the HTML, but turns out it's actually the *to_html()* function on the DataFrame itself, which outputs an HTML string that Jupyter injects into the DOM as-is. So for fun, I decided to create a web page and do exactly the same thing. First thing I did was concatenate all the output of *to_html()* for every table. Then, to trick Python into writing JavaScript, I wrapped that in backticks and prepended *"let = content "*. Now we have a ready-to-inject JavaScript template literal, which looks something like this:
 
-But as far as I can tell, Python won't write to a JS file, but the `<script>` tag isn't picky, it's perfectly happy to run JavaScript code from a TXT file. I created the *index.html* file, added some boilerplate, a jumbotron, and a target `<div>`, then 2 script tags: the first to run *output.txt*, and another to run *index.js*, which injects that *content* variable into the target `<div>` and gives it a haircut. Throw in Bootstrap and a *style.css*, spin up LiveServer, and you get this:
+```
+let text = `<div id="players" class="container table-container">
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>Number of Players</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>576</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`
+```
+
+As far as I can tell, Python won't open/write to a JS file, but thankfully the `<script>` tag isn't picky, it's perfectly happy to run JavaScript code from a TXT file. I created the *index.html* file, added some boilerplate, a jumbotron, and a target `<div>`, then 2 script tags: the first to run *output.txt*, and another to run *index.js*, which injects that *content* variable into the target `<div>` and does some more vanilla JS DOM manipulation to add some classes and `<h4>`s. Throw in Bootstrap and a *style.css*, spin up LiveServer, and you get this:
 
 ![Webpage demo](./HeroesOfPymoli/images/pymoli-demo.gif)
 
