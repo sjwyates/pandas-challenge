@@ -112,8 +112,24 @@ I got tired of doing that over and over, so I told Pandas to format every float 
 
 Now I only had to call *map()* twice to override that formatting for the percents in the gender and age demographics tables, and all the other floats became currency by default.
 
-## Summary
+## Observable Trends
 
-This was a pretty challenging assignment. Pandas is very elegant and useful, but also very complex. Most of its methods have at least a few overrides - eg, the DataFrame constructor mentioned above - and a laundry list of *kwargs*, so it's like that parable about blind men describing an elephant. And while it cuts out huge chunks of procedural boilerplate, it does so by being bewilderingly declarative.
+### Gender
 
-Translation: Pandas is fun.
+While self-identified males account for 84% of all players and purchases, they're not the spendiest - that title goes to the 'Other / Non-Disclosed' group. While they account for only 2% of all players, they spend 11% more per item and 12% more overall. However, with a sample size of 11, we should probably avoid drawing any conclusions about their spending habits. We also don't how many are gender binary - ie, they are either male or female, but prefer not to identify - or gender non-conforming, so we shouldn't treat them as a monolithic group. That being said, I would advise the designers to make the game more inclusive to gender non-conforming players.
+
+Female players also spent more than their male counterparts - 6% more per item and 10% more overall - and with a sample size of 81, it's safer to draw the conclusion that of the 2 gender-binary demographics, females buy more often and are more likely to go top shelf when they do. Therefore, I would encourage the design team to hire more female developers and game testers to make sure it doesn't put female gamers off with regressive gender tropes, and suggest that the marketing team target the female gamer community via their advertising and SEO/analytics.
+
+The one area where males dominate is the Top Spenders chart. In fact, all of the top 5 spenders are male.
+
+### Age
+
+Of the age groups, the 20-24 group stands out as the most profitable, with 47% of total purchases. While their average purchase price is exactly average at $3.05, overall they spend almost 5% more than the average player. And similar to the male demographic, they dominate at the top: Only 1 player in the top 5 spenders is outside this demographic, but only by a year (25).
+
+Only 2 other age groups spend more than average: The youngest (under 10) and the 2nd oldest (35-39). They're also the only groups that spend more per item than average, with the 35-39 group spending a whopping 18% more per item and 15% more in total. The lowest spenders are the 25-29 group, and we can see an upward trend as players enter their 30s, which could be a matter of disposable income (according to IRS data, the median income of a 30 year-old is 29% higher than a 25 year-old, and this rises a further 25% between the ages of 30 and 35). Game designers and marketing staff would be wise to target this early millenial demographic.
+
+And while 20 year-olds make only half of what 25 year-olds make, they tend to have more financial support, fewer financial obligations, and are considerably less resonsible, which may be why they're more likely to drop $4.82 on a Fusion Pummel.
+
+### Items
+
+When it comes to the most popular items, it doesn't seem like price is the determining factor. The 3 most popular items - Final Critic, Oathbreaker, and Fiery Glass Crusader - skew heavily top-shelf. Why not introduce some higher-priced items and see how much players are willing to spend?
